@@ -11,7 +11,9 @@ class parse_schedule:
         self.year = 2000
         self.month = 1
         self.operations = []
-        self.notes = ''
+        self.note_str = ''
+        self.notes = {}
+        self.notes_exist = False
         self.total_duration = 0
         self.schedule = []
 
@@ -29,17 +31,23 @@ class parse_schedule:
         special_time = rest_of_file.split('#')[3]
 
         if len(rest_of_file.split('#')) > 4:
-            self.notes = rest_of_file.split('#')[4]
+            self.note_str = rest_of_file.split('#')[4]
+            self.notes_exist = True
         else:
-            self.notes = "No notes"
+            self.note_str = "No notes"
+            self.notes_exist = False
 
         date = datetime.strptime(date_str, "%B %Y")
         self.month = date.month
         self.year = date.year
 
     def get_notes(self):
-        note_str = re.search(r'Note [A-Z]', self.notes, re.M)
-        print(note_str.group())
+        note_sections = self.note_str.split('Note ')[1:]
+
+        i = 0
+        for note in note_sections:
+            self.notes.update({f"Note {chr(ord('A') + i)})" : note.split()[1]})
+            i += 1
 
     def generate_schedule(self):
         entry = {
@@ -51,6 +59,9 @@ class parse_schedule:
             'Time String': '',
             'Mode'  : 'Common Time'
         }
+
+        if self.notes_exist:
+            self.get_notes()
 
         for op in range(len(self.operations)):
             operation = self.operations[op].split("    ")
@@ -69,7 +80,7 @@ class parse_schedule:
 
             entry['Mode'] = operation[2].split()[0]
             if entry['Mode'] == 'Special':
-                entry['Mode'] += " (" + operation[2].split("(see ")[1]
+                entry['Mode'] += ":" + self.notes[operation[2].split("(see ")[1]]
 
             self.schedule.append(entry.copy())
 
@@ -88,4 +99,4 @@ if __name__ == '__main__':
     parser.read_schedule()
     parser.generate_schedule()
     parser.print_schedule()
-    parser.get_notes()
+

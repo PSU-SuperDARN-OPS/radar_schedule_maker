@@ -22,15 +22,15 @@ October 2019
 
 Special Time notes:
 
-Note A: This time covers the 'Pulsating Aurora' request (Hosokawa). All radars should
+Note A: THEMISSCAN This time covers the 'Pulsating Aurora' request (Hosokawa). All radars should
 run themisscan during this interval. This mode has a camping beam which is sounded
 on every 6 seconds. The scanning scheme is such that the field of view scan is
 interleaved with the camping beam.
 
-Note B: This time covers the 'ULF Wave' request (Shi). All radars should run rbspscan
+Note B: RBSPSCAN This time covers the 'ULF Wave' request (Shi). All radars should run rbspscan
 during this interval. This mode consists of a full scan of at least 16 beams with an
 interleaved mini-scan of 3 beams, with a scan time of 2-min.
 
-Note C: This time covers the 'EISCAT/Heater' discretionary time request (Yeoman).
+Note C: NORMALSCAN This time covers the 'EISCAT/Heater' discretionary time request (Yeoman).
 The only radar covered by this request is HAN. All other radars run their normal
 discretionary time programs.

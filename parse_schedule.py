@@ -2,7 +2,7 @@
 # Minimum requirements are Python 3.6
 from datetime import datetime
 
-with open('sample.txt', 'r') as file:
+with open('sample_notes.txt', 'r') as file:
     date_str = file.readline().rstrip()
     rest_of_file = file.read()
 
@@ -37,6 +37,7 @@ entry = {
 }
 
 schedule = []
+total_duration = 0
 for op in range(len(operations)):
     operation = operations[op].split("    ")
 
@@ -47,6 +48,7 @@ for op in range(len(operations)):
 
     entry['Duration'] = (entry['Stop Day'] - entry['Start Day']) * (24 * 60) \
                         + (entry['Stop Hour'] - entry['Start Hour']) * 60
+    total_duration += entry['Duration']
 
     entry['Mode'] = operation[2]
 
@@ -54,3 +56,4 @@ for op in range(len(operations)):
 
 for line in schedule:
     print(f"{year} {month:02} {line['Start Day']:02} {line['Start Hour']:02} 00 {line['Duration']:6} {line['Mode']}")
+print(f"Monthly total: {total_duration}, Should be {31*24*60}")

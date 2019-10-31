@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # Minimum requirements are Python 3.6
 from datetime import datetime
-import re
 
 
 class ScheduleParser:
@@ -34,34 +33,33 @@ class ScheduleParser:
             self.note_str = rest_of_file.split('#')[4]
             self.notes_exist = True
         else:
-            self.note_str = "No notes"
             self.notes_exist = False
 
         date = datetime.strptime(date_str, "%B %Y")
         self.month = date.month
         self.year = date.year
 
-    def get_notes(self):
+    def __get_notes(self):
         note_sections = self.note_str.split('Note ')[1:]
 
         i = 0
         for note in note_sections:
-            self.notes.update({f"Note {chr(ord('A') + i)})" : note.split()[1]})
+            self.notes.update({f"Note {chr(ord('A') + i)})": note.split()[1]})
             i += 1
 
     def format_schedule(self):
         entry = {
-            'Start Day' : 0,
+            'Start Day': 0,
             'Start Hour': 0,
-            'Stop Day'  : 0,
-            'Stop Hour' : 0,
-            'Duration'  : 0,
+            'Stop Day': 0,
+            'Stop Hour': 0,
+            'Duration': 0,
             'Time String': '',
-            'Mode'  : 'Common Time'
+            'Mode': 'Common Time'
         }
 
         if self.notes_exist:
-            self.get_notes()
+            self.__get_notes()
 
         for op in range(len(self.operations)):
             operation = self.operations[op].split("    ")
@@ -93,10 +91,13 @@ class ScheduleParser:
         print(f"Monthly total: {self.total_duration}, "
               f"Should be {self.schedule[len(self.schedule)-1]['Stop Day']*24*60}")
 
+    def run(self):
+        self.read_schedule()
+        self.format_schedule()
+
 
 if __name__ == '__main__':
     parser = ScheduleParser('sample_notes.txt')
-    parser.read_schedule()
-    parser.format_schedule()
+    parser.run()
     parser.print_schedule()
 

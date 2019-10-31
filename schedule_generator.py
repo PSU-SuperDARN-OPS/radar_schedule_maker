@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 # Minimum requirements are Python 3.6
 
-import scheduleparser as ps
+import schedule_parser as ps
 from radar_modes import radar
 
 
-class ScheduleGenerator():
+class ScheduleGenerator(object):
     def __init__(self, site, channel, schedule_file):
         self.site = site
         self.site_channel = channel
@@ -18,8 +18,7 @@ class ScheduleGenerator():
 
     def get_schedule(self):
         parser = ps.ScheduleParser(self.schedule_file)
-        parser.read_schedule()
-        parser.format_schedule()
+        parser.run()
         self.generic_schedule = parser.get_schedule()
 
     def generate_header(self):

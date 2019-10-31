@@ -4,7 +4,7 @@ from datetime import datetime
 import re
 
 
-class parse_schedule:
+class ScheduleParser:
     """A class that parses the SuperDARN scheduling files and returns a generic schedule for the radars"""
     def __init__(self, filename):
         self.filename = filename
@@ -49,7 +49,7 @@ class parse_schedule:
             self.notes.update({f"Note {chr(ord('A') + i)})" : note.split()[1]})
             i += 1
 
-    def generate_schedule(self):
+    def format_schedule(self):
         entry = {
             'Start Day' : 0,
             'Start Hour': 0,
@@ -95,8 +95,8 @@ class parse_schedule:
 
 
 if __name__ == '__main__':
-    parser = parse_schedule('sample_notes.txt')
+    parser = ScheduleParser('sample_notes.txt')
     parser.read_schedule()
-    parser.generate_schedule()
+    parser.format_schedule()
     parser.print_schedule()
 

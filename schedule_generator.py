@@ -39,16 +39,16 @@ class ScheduleGenerator(object):
 
     def generate_schedule(self):
 
-        for line in self.generic_schedule:
-            if line['Mode'] != 'Common' and line['Mode'] != 'Discretionary':
+        for scheduled in self.generic_schedule:
+            if scheduled['Mode'] != 'Common' and scheduled['Mode'] != 'Discretionary':
                 self.schedule.append(f"# >>> Schedule Note <<< "
-                                     f"The following entry is operating in the mode {line['Mode']}")
+                                     f"The following entry is operating in the mode {scheduled['Mode']}")
 
-            self.schedule.append(f"{line['Time String']:6} "
+            self.schedule.append(f"{scheduled['Time String']:6} "
                                  f"{self.default_priority:>3} "
                                  f"{radar[self.site]['Control Program']} "
                                  f"--stid {self.site} "
-                                 f"{radar[self.site]['Mode'][line['Mode']]} "
+                                 f"{radar[self.site]['Mode'][scheduled['Mode']]} "
                                  f"{radar[self.site]['Control Program Arguments']} "
                                  f"--df {radar[self.site]['Day Frequency']} "
                                  f"--nf {radar[self.site]['Night Frequency']} "

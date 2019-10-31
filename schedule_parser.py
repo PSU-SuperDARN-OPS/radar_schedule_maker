@@ -44,7 +44,12 @@ class ScheduleParser:
 
         i = 0
         for note in note_sections:
-            self.notes.update({f"Note {chr(ord('A') + i)})": note.split()[1]})
+            correct_mode = input(f"If '{note.split()[1]}' is the correct mode for Note {chr(ord('A') + i)}, "
+                                 f"enter 'y'. Else enter the correct mode: ")
+            if correct_mode == 'y':
+                self.notes.update({f"Note {chr(ord('A') + i)})": note.split()[1]})
+            else:
+                self.notes.update({f"Note {chr(ord('A') + i)})": correct_mode})
             i += 1
 
     def format_schedule(self):

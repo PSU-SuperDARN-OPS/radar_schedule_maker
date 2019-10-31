@@ -58,6 +58,10 @@ class ScheduleGenerator(object):
         for line in range(len(self.schedule)):
             print(f"{self.schedule[line]:100} {self.generic_schedule[line]['Mode'] if self.check else ''}")
 
+    def run(self):
+        self.get_schedule()
+        self.generate_schedule()
+
 
 if __name__ == '__main__':
     generator = ScheduleGenerator('kod', 'd', 'dec.txt')

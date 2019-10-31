@@ -1,0 +1,3 @@
+[submodule "external/schedules"]
+	path = external/schedules
+	url = https://github.com/SuperDARN/schedules.git

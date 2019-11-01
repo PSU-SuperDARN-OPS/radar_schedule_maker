@@ -38,8 +38,8 @@ def test_good_entry_time_string(good_entry):
 
 
 def test_good_entry_string(good_entry):
-    assert good_entry.get_entry_string() == '2019 01 01 00 00   1680 Common'
+    assert good_entry.get_entry_string() == "2019 01 01 00 00   1680 Common ['ALL']"
 
 
 def test_good_entry_return(good_entry):
-    assert good_entry.get_entry() == {'Time String': '2019 01 01 00 00   1680', 'Mode': 'Common'}
+    assert good_entry.get_entry() == {'Time String': '2019 01 01 00 00   1680', 'Mode': 'Common', 'Radars': ['ALL']}

@@ -2,7 +2,7 @@
 
 
 class Entry:
-    def __init__(self, year=0, month=0, start_day=0, start_hour=0, stop_day=0, stop_hour=0, mode=''):
+    def __init__(self, year=0, month=0, start_day=0, start_hour=0, stop_day=0, stop_hour=0, mode='', radar=['ALL']):
         self.year = year
         self.month = month
         self.start_day = start_day
@@ -10,6 +10,7 @@ class Entry:
         self.stop_day = stop_day
         self.stop_hour = stop_hour
         self.mode = mode
+        self.radar = radar
 
     def get_duration(self):
         return (self.stop_day - self.start_day) * (24 * 60) \
@@ -17,16 +18,17 @@ class Entry:
 
     def get_time_string(self):
         return f"{self.year} {self.month:02} " \
-               f"{self.start_day:02} {self.start_hour:02} 00 {self.get_duration():6}"
+            f"{self.start_day:02} {self.start_hour:02} 00 {self.get_duration():6}"
 
     def get_entry_string(self):
-        return f"{self.get_time_string()} {self.mode}"
+        return f"{self.get_time_string()} {self.mode} {self.radar}"
 
     def get_entry(self):
         return {'Time String': self.get_time_string(),
-                'Mode': self.mode}
+                'Mode': self.mode,
+                'Radars': self.radar}
 
-# Everything below this may be unneeded
+    # Everything below this may be unneeded
     def get_start_day(self):
         return self.start_day
 

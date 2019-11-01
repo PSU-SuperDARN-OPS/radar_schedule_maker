@@ -19,6 +19,9 @@ class Entry:
         return f"{self.year} {self.month:02} " \
                f"{self.start_day:02} {self.start_hour:02} 00 {self.get_duration():6}"
 
+    def get_entry_string(self):
+        return f"{self.get_time_string()} {self.mode}"
+
     def get_start_day(self):
         return self.start_day
 

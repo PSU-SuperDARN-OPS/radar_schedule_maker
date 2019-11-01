@@ -8,3 +8,6 @@ class Schedule:
         self.year = year
         self.month = month
         self.entries = []
+
+    def add_entry(self, start_day, start_hour, stop_day, stop_hour, mode):
+        self.entries.append(Entry(self.year, self.month, start_day, start_hour, stop_day, stop_hour, mode).get_entry())

@@ -22,6 +22,10 @@ class Entry:
     def get_entry_string(self):
         return f"{self.get_time_string()} {self.mode}"
 
+    def get_entry(self):
+        return {'Time String': self.get_time_string(),
+                'Mode': self.mode}
+
     def get_start_day(self):
         return self.start_day
 

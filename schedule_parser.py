@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # Minimum requirements are Python 3.6
 from datetime import datetime
+from schedule import Schedule
 
 
 class ScheduleParser:
@@ -14,7 +15,7 @@ class ScheduleParser:
         self.notes = {}
         self.notes_exist = False
         self.total_duration = 0
-        self.schedule = []
+        self.schedule = Schedule()
 
     def read_schedule(self):
         with open(self.filename, 'r') as file:
@@ -35,9 +36,14 @@ class ScheduleParser:
         else:
             self.notes_exist = False
 
+        self.set_date(date_str)
+
+    def set_date(self, date_str):
         date = datetime.strptime(date_str, "%B %Y")
         self.month = date.month
         self.year = date.year
+        self.schedule.set_month(self.month)
+        self.schedule.set_year(self.year)
 
     def __get_notes(self):
         note_sections = self.note_str.split('Note ')[1:]
@@ -68,33 +74,28 @@ class ScheduleParser:
 
         for op in range(len(self.operations)):
             operation = self.operations[op].split("    ")
+            start_time = operation[0]
+            stop_time = operation[1]
+            mode_and_note = operation[2]
 
-            entry['Start Day'] = int(operation[0].split(':')[0])
-            entry['Start Hour'] = int(operation[0].split(':')[1])
-            entry['Stop Day'] = int(operation[1].split(':')[0])
-            entry['Stop Hour'] = int(operation[1].split(':')[1])
+            start_day = int(start_time.split(':')[0])
+            start_hour = int(start_time.split(':')[1])
+            stop_day = int(stop_time.split(':')[0])
+            stop_hour = int(stop_time.split(':')[1])
 
-            entry['Duration'] = (entry['Stop Day'] - entry['Start Day']) * (24 * 60) \
-                                + (entry['Stop Hour'] - entry['Start Hour']) * 60
-            self.total_duration += entry['Duration']
+            mode = mode_and_note.split()[0]
+            if mode == 'Special':
+                mode += ":" + self.notes[mode_and_note.split("(see ")[1]]
 
-            entry['Time String'] = f"{self.year} {self.month:02} " \
-                f"{entry['Start Day']:02} {entry['Start Hour']:02} 00 {entry['Duration']:6}"
+            self.schedule.add_entry(start_day, start_hour, stop_day, stop_hour, mode)
 
-            entry['Mode'] = operation[2].split()[0]
-            if entry['Mode'] == 'Special':
-                entry['Mode'] += ":" + self.notes[operation[2].split("(see ")[1]]
-
-            self.schedule.append(entry.copy())
+        self.total_duration = self.schedule.get_duration()
 
     def get_schedule(self):
         return self.schedule
 
     def print_schedule(self):
-        for line in self.schedule:
-            print(f"{line['Time String']} {line['Mode']}")
-        print(f"Monthly total: {self.total_duration}, "
-              f"Should be {self.schedule[len(self.schedule)-1]['Stop Day']*24*60}")
+        self.schedule.print_schedule()
 
     def run(self):
         self.read_schedule()

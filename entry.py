@@ -26,6 +26,7 @@ class Entry:
         return {'Time String': self.get_time_string(),
                 'Mode': self.mode}
 
+# Everything below this may be unneeded
     def get_start_day(self):
         return self.start_day
 

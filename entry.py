@@ -51,7 +51,7 @@ class Entry:
         return f"{self.get_time_string()} {self.mode} {self.radar}"
 
     def get_entry(self):
-        """Returns the formatted time string, the mode, and the radars the entry applies to in a list"""
+        """Returns the formatted time string, the mode, and the radars the entry applies to in a dictionary"""
         return {'Time String': self.get_time_string(),
                 'Mode': self.mode,
                 'Radars': self.radar}

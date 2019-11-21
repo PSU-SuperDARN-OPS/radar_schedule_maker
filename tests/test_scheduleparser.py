@@ -29,6 +29,7 @@ def test_month(good_schedule_legacy):
     good_schedule_legacy.set_date()
     assert good_schedule_legacy.month == 9
 
+
 # Test for set_date
 def test_year(good_schedule_legacy):
     good_schedule_legacy.set_date()

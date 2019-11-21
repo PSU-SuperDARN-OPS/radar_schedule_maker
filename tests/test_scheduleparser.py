@@ -54,6 +54,28 @@ def test_operation(good_schedule, monkeypatch):
     # Override the Python built-in input method
     monkeypatch.setattr('builtins.input', lambda x: 'y')
 
+    good_schedule.set_date()
     good_schedule.get_notes()
     good_schedule.get_operation()
-    assert good_schedule.print_schedule() == ""
+    assert good_schedule.get_schedule() == "2019 12 01 00 00   3240 Common ['ALL']" \
+                                             "2019 12 03 06 00    360 Common ['ALL']" \
+                                             "2019 12 03 12 00   4320 Discretionary ['ALL']" \
+                                             "2019 12 06 12 00   3960 Common ['ALL']" \
+                                             "2019 12 09 06 00   4320 Discretionary ['ALL']" \
+                                             "2019 12 12 06 00    360 Common ['ALL']" \
+                                             "2019 12 12 12 00   5040 Common ['ALL']" \
+                                             "2019 12 16 00 00   4320 Discretionary ['ALL']" \
+                                             "2019 12 19 00 00    360 Common ['ALL']" \
+                                             "2019 12 19 06 00    720 Special:THEMISSCAN [ALL]" \
+                                             "2019 12 19 18 00   2160 Common ['ALL']" \
+                                             "2019 12 21 06 00    360 Common ['ALL']" \
+                                             "2019 12 21 12 00    360 Special:THEMISSCAN [ALL]" \
+                                             "2019 12 21 18 00   3240 Common ['ALL']" \
+                                             "2019 12 24 00 00   4320 Special:RBSPSCAN [ALL]" \
+                                             "2019 12 27 00 00    360 Common ['ALL']" \
+                                             "2019 12 27 06 00    720 Special:THEMISSCAN [ALL]" \
+                                             "2019 12 27 18 00   2160 Common ['ALL']" \
+                                             "2019 12 29 06 00    720 Special:THEMISSCAN [ALL]" \
+                                             "2019 12 29 18 00    720 Common ['ALL']" \
+                                             "2019 12 30 06 00    360 Common ['ALL']" \
+                                             "2019 12 30 12 00   2160 Common ['ALL']"

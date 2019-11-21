@@ -2,8 +2,12 @@
 # Minimum requirements are Python 3.6
 
 import argparse
+from datetime import date
+
 import schedule_generator
 import schedule_parser
+
+today = date.today()
 
 parser = argparse.ArgumentParser(description='SuperDARN Schedule Maker')
 site_group = parser.add_mutually_exclusive_group(required=True)
@@ -14,9 +18,9 @@ parser.add_argument("--channel", "-c", default='a', type=str, choices=['a', 'b',
                     help='Channel of the radar [Example: a, b, c, d]')
 site_group.add_argument("--sitelist", default=None, type=str, nargs='*',
                         help="List of station ID followed by a period and channel letter [Example: kod.c, kod.d]")
-parser.add_argument("-m", "--month", type=int, choices=range(1, 13),
+parser.add_argument("-m", "--month", default=today.month+1, type=int, choices=range(1, 13),
                     help="Enter the numeric value for the month of the schedule")
-parser.add_argument("-y", "--year", type=int, help="Enter the year of the schedule")
+parser.add_argument("-y", "--year", default=today.year, type=int, help="Enter the year of the schedule")
 
 args = parser.parse_args()
 

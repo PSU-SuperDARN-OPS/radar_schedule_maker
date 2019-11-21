@@ -70,13 +70,13 @@ def test_operation(good_schedule, monkeypatch):
                                              "2019 12 19 06 00    720 Special:THEMISSCAN [ALL]" \
                                              "2019 12 19 18 00   2160 Common ['ALL']" \
                                              "2019 12 21 06 00    360 Common ['ALL']" \
-                                             "2019 12 21 12 00    360 Special:THEMISSCAN [ALL]" \
+                                             "2019 12 21 12 00    360 Special:THEMISSCAN ['ALL']" \
                                              "2019 12 21 18 00   3240 Common ['ALL']" \
-                                             "2019 12 24 00 00   4320 Special:RBSPSCAN [ALL]" \
+                                             "2019 12 24 00 00   4320 Special:RBSPSCAN ['ALL']" \
                                              "2019 12 27 00 00    360 Common ['ALL']" \
-                                             "2019 12 27 06 00    720 Special:THEMISSCAN [ALL]" \
+                                             "2019 12 27 06 00    720 Special:THEMISSCAN ['ALL']" \
                                              "2019 12 27 18 00   2160 Common ['ALL']" \
-                                             "2019 12 29 06 00    720 Special:THEMISSCAN [ALL]" \
+                                             "2019 12 29 06 00    720 Special:THEMISSCAN ['ALL']" \
                                              "2019 12 29 18 00    720 Common ['ALL']" \
                                              "2019 12 30 06 00    360 Common ['ALL']" \
                                              "2019 12 30 12 00   2160 Common ['ALL']"

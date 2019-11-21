@@ -35,7 +35,6 @@ class ScheduleGenerator(object):
         print(self.header)
 
     def generate_schedule(self):
-
         for scheduled in self.generic_schedule:
             if scheduled['Mode'] != 'Common' and scheduled['Mode'] != 'Discretionary':
                 self.schedule.append(f"# >>> Schedule Note <<< "

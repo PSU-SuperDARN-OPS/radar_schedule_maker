@@ -45,3 +45,13 @@ class Schedule:
         for entry in self.entries:
             print(entry.get_entry_string())
 
+    def get_schedule_string(self):
+        """Returns schedule in an abbreviated version of the Scheduler format"""
+        schedule = ""
+        for entry in self.entries:
+            schedule += entry.get_entry_string()
+
+        return schedule
+
+
+

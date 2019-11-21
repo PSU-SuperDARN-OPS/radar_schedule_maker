@@ -99,6 +99,9 @@ class ScheduleParser:
 
         self.total_duration = self.schedule.get_duration()
 
+    def get_schedule_string(self):
+        return self.schedule.get_schedule_string()
+
     def get_schedule(self):
         return self.schedule
 

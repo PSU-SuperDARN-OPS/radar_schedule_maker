@@ -57,7 +57,7 @@ def test_operation(good_schedule, monkeypatch):
     good_schedule.set_date()
     good_schedule.get_notes()
     good_schedule.get_operation()
-    assert good_schedule.get_schedule() == "2019 12 01 00 00   3240 Common ['ALL']" \
+    assert good_schedule.get_schedule_string() == "2019 12 01 00 00   3240 Common ['ALL']" \
                                              "2019 12 03 06 00    360 Common ['ALL']" \
                                              "2019 12 03 12 00   4320 Discretionary ['ALL']" \
                                              "2019 12 06 12 00   3960 Common ['ALL']" \

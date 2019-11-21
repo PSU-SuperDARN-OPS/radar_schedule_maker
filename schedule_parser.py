@@ -63,21 +63,31 @@ class ScheduleParser:
 
     def get_operation(self):
         for op in range(len(self.raw_operations)):
-            operation = self.raw_operations[op].split("    ")
+            # print(self.raw_operations[op])
+            operation = self.raw_operations[op].split()
+            # print(operation)
             start_time = operation[0]
             stop_time = operation[1]
-            mode_and_note = operation[2]
+            mode = operation[2]
 
             start_day = int(start_time.split(':')[0])
             start_hour = int(start_time.split(':')[1])
             stop_day = int(stop_time.split(':')[0])
             stop_hour = int(stop_time.split(':')[1])
 
-            mode = mode_and_note.split()[0]
             if mode == 'Special':
-                mode += ":" + self.notes[mode_and_note.split("(see ")[1][:-1]]
+                special_mode = operation[4].strip('()')
+                if special_mode == "see":
+                    special_mode = self.notes[f"{operation[5]} {operation[6].strip(')')}"]
+                    mode += f":{special_mode}"
+                else:
+                    mode += f":{special_mode}SCAN"
 
-            self.schedule.add_entry(start_day, start_hour, stop_day, stop_hour, mode)
+                radar = operation[5]
+            else:
+                radar = ['ALL']
+
+            self.schedule.add_entry(start_day, start_hour, stop_day, stop_hour, mode, radar)
 
     def format_schedule(self):
         self.set_date()

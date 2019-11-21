@@ -14,9 +14,9 @@ class Schedule:
         self.month = month
         self.entries = []
 
-    def add_entry(self, start_day, start_hour, stop_day, stop_hour, mode):
+    def add_entry(self, start_day, start_hour, stop_day, stop_hour, mode, radar=["ALL"]):
         """Create an new Entry and append it to the list of entries"""
-        self.entries.append(Entry(self.year, self.month, start_day, start_hour, stop_day, stop_hour, mode))
+        self.entries.append(Entry(self.year, self.month, start_day, start_hour, stop_day, stop_hour, mode, radar))
 
     def set_year(self, year):
         self.year = year

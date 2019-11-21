@@ -3,6 +3,7 @@
 
 import argparse
 import schedule_generator
+import schedule_parser
 
 parser = argparse.ArgumentParser(description='SuperDARN Schedule Maker')
 site_group = parser.add_mutually_exclusive_group(required=True)
@@ -23,6 +24,9 @@ print(args.sitelist)
 
 schedule_file = f"{args.year}{args.month:02}.swg"
 schedule_path = f"external/schedules/{args.year}/"
+
+schedule = schedule_parser.ScheduleParser(schedule_path + schedule_file)
+schedule.run()
 
 generator = schedule_generator.ScheduleGenerator('kod', 'd', schedule_path + schedule_file)
 generator.run()

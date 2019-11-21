@@ -6,20 +6,17 @@ from radar_modes import radar
 
 
 class ScheduleGenerator(object):
-    def __init__(self, site, channel, schedule_file):
+    """
+    Takes a schedule object that has been parsed and generates the file the scheduler on a radar needs
+    """
+    def __init__(self, site, channel, schedule_object):
         self.site = site
         self.site_channel = channel
-        self.schedule_file = schedule_file
         self.check = False
         self.default_priority = 5
-        self.generic_schedule = []
+        self.generic_schedule = schedule_object.get_entries()
         self.header = ''
         self.schedule = []
-
-    def get_schedule(self):
-        parser = ps.ScheduleParser(self.schedule_file)
-        parser.run()
-        self.generic_schedule = parser.get_schedule()
 
     def generate_header(self):
         self.header = (f"path {radar[self.site]['Control Program Path']}\n"
@@ -59,12 +56,12 @@ class ScheduleGenerator(object):
             print(f"{self.schedule[line]:100} {self.generic_schedule[line]['Mode'] if self.check else ''}")
 
     def run(self):
-        self.get_schedule()
         self.generate_schedule()
 
 
 if __name__ == '__main__':
-    generator = ScheduleGenerator('kod', 'd', 'dec.txt')
-    generator.get_schedule()
+    schedule = ps.ScheduleParser('dec.txt')
+    schedule.run()
+    generator = ScheduleGenerator('kod', 'd', schedule.get_schedule())
     generator.generate_schedule()
     generator.print_schedule()

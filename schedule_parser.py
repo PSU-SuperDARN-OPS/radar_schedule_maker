@@ -114,7 +114,7 @@ class ScheduleParser:
 
 
 if __name__ == '__main__':
-    parser = ScheduleParser('sample_notes.txt')
+    parser = ScheduleParser('tests/test_schedules/good_schedule_notes.txt')
     parser.run()
     parser.print_schedule()
 

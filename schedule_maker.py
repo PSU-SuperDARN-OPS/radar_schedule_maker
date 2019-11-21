@@ -28,6 +28,6 @@ schedule_path = f"external/schedules/{args.year}/"
 schedule = schedule_parser.ScheduleParser(schedule_path + schedule_file)
 schedule.run()
 
-generator = schedule_generator.ScheduleGenerator('kod', 'd', schedule_path + schedule_file)
+generator = schedule_generator.ScheduleGenerator('kod', 'd', schedule.get_schedule())
 generator.run()
 generator.print_schedule()

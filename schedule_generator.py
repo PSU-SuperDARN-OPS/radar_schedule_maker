@@ -60,7 +60,7 @@ class ScheduleGenerator(object):
 
 
 if __name__ == '__main__':
-    schedule = ps.ScheduleParser('dec.txt')
+    schedule = ps.ScheduleParser('tests/test_schedules/good_schedule_notes.txt')
     schedule.run()
     generator = ScheduleGenerator('kod', 'd', schedule.get_schedule())
     generator.generate_schedule()

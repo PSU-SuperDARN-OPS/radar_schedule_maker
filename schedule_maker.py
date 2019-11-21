@@ -29,8 +29,25 @@ print(args.sitelist)
 schedule_file = f"{args.year}{args.month:02}.swg"
 schedule_path = f"external/schedules/{args.year}/"
 
+schedule_date = date(args.year, args.month, 1)
+
+
+def frame_print(framed_str):
+    width = len(framed_str)
+    print('*' * width)
+    print(framed_str)
+    print('*' * width)
+
+
+frame_print(f"Parsing Schedule for {schedule_date.strftime('%B %Y')}")
+
 schedule = schedule_parser.ScheduleParser(schedule_path + schedule_file)
 schedule.run()
+
+frame_print("Parsed Generic Schedule")
+schedule.print_schedule()
+
+correct_schedule = input("Is the parsed schedule correct? Enter 'y' if it is, 'n' if not: ")
 
 generator = schedule_generator.ScheduleGenerator('kod', 'd', schedule.get_schedule())
 generator.run()

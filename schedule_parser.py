@@ -83,7 +83,7 @@ class ScheduleParser:
                 else:
                     mode += f":{special_mode}SCAN"
 
-                radar = operation[5]
+                radar = [operation[5].strip('[]')]
             else:
                 radar = ['ALL']
 

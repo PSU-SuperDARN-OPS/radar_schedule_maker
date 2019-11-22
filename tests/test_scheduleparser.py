@@ -67,7 +67,7 @@ def test_operation(good_schedule, monkeypatch):
                                              "2019 12 12 12 00   5040 Common ['ALL']" \
                                              "2019 12 16 00 00   4320 Discretionary ['ALL']" \
                                              "2019 12 19 00 00    360 Common ['ALL']" \
-                                             "2019 12 19 06 00    720 Special:THEMISSCAN [ALL]" \
+                                             "2019 12 19 06 00    720 Special:THEMISSCAN ['ALL']" \
                                              "2019 12 19 18 00   2160 Common ['ALL']" \
                                              "2019 12 21 06 00    360 Common ['ALL']" \
                                              "2019 12 21 12 00    360 Special:THEMISSCAN ['ALL']" \

@@ -54,6 +54,13 @@ class ScheduleGenerator(object):
         for line in range(len(self.schedule)):
             print(f"{self.schedule[line]:100} {self.generic_schedule[line]['Mode'] if self.check else ''}")
 
+    def get_schedule(self):
+        schedule_output = ''
+        for line in range(len(self.schedule)):
+            schedule_output += f"{self.schedule[line]:100} {self.generic_schedule[line]['Mode'] if self.check else ''}\n"
+
+        return schedule_output
+
     def run(self):
         self.generate_schedule()
 

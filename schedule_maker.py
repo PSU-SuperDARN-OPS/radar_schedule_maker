@@ -49,6 +49,30 @@ schedule.print_schedule()
 
 correct_schedule = input("Is the parsed schedule correct? Enter 'y' if it is, 'n' if not: ")
 
-generator = schedule_generator.ScheduleGenerator('kod', 'd', schedule.get_schedule())
-generator.run()
-generator.print_schedule()
+if correct_schedule != 'y':
+    quit()
+
+site_list = []
+
+if not args.sitelist:
+    site_list = [f"{args.site}.{args.channel}"]
+else:
+    site_list = args.sitelist
+
+for site in site_list:
+    frame_print(f"Generating Schedule for {site}")
+
+    generator = schedule_generator.ScheduleGenerator(site.split('.')[0], site.split('.')[1], schedule.get_schedule())
+    generator.run()
+    generator.print_schedule()
+
+    correct_schedule = input("Is the generated schedule correct? Enter 'y' if it is, 'n' if not: ")
+
+    if correct_schedule == 'y':
+        print("Yay")
+        with open(f"external/temp_out/{site}.scd", 'w') as file:
+            file.write(generator.get_schedule())
+    else:
+        quit()
+
+

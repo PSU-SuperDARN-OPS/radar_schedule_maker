@@ -25,7 +25,7 @@ parser.add_argument("-a", "--append", default=False, action='store_true', help="
 parser.add_argument("--header", default=False, action='store_true', help="Print the header at the top of the file")
 args = parser.parse_args()
 
-print(args.sitelist)
+print(args)
 
 schedule_file = f"{args.year}{args.month:02}.swg"
 schedule_path = f"external/schedules/{args.year}/"
@@ -69,10 +69,19 @@ for site in site_list:
 
     correct_schedule = input("Is the generated schedule correct? Enter 'y' if it is, 'n' if not: ")
 
+    if args.append:
+        write_mode = 'a'
+    else:
+        write_mode = 'w'
+
     if correct_schedule == 'y':
-        print("Yay")
-        with open(f"external/temp_out/{site}.scd", 'w') as file:
+        with open(f"external/temp_out/{site}.scd", write_mode) as file:
+            if args.header:
+                generator.generate_header()
+                file.write(generator.header)
+
             file.write(generator.get_schedule())
+            file.close()
     else:
         quit()
 

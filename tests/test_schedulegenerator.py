@@ -34,6 +34,7 @@ def test_generate_header(good_schedule):
                          'priority 1\n' \
                          'duration a\n\n'
 
+
 def test_generate_schedule(good_schedule):
     gen = schedule_generator.ScheduleGenerator('kod', 'c', good_schedule.get_schedule())
     gen.run()

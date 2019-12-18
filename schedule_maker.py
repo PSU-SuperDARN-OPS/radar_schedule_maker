@@ -18,10 +18,11 @@ parser.add_argument("--channel", "-c", default='a', type=str, choices=['a', 'b',
                     help='Channel of the radar [Example: a, b, c, d]')
 site_group.add_argument("--sitelist", default=None, type=str, nargs='*',
                         help="List of station ID followed by a period and channel letter [Example: kod.c, kod.d]")
-parser.add_argument("-m", "--month", default=today.month+1, type=int, choices=range(1, 13),
+parser.add_argument("-m", "--month", default=today.month % 12+1, type=int, choices=range(1, 13),
                     help="Enter the numeric value for the month of the schedule")
-parser.add_argument("-y", "--year", default=today.year, type=int, help="Enter the year of the schedule")
-
+parser.add_argument("-y", "--year", default=today.year + int(today.month / 12), type=int, help="Enter the year of the schedule")
+parser.add_argument("-a", "--append", default=False, action='store_true', help="Append the schedule or overwrite file")
+parser.add_argument("--header", default=False, action='store_true', help="Print the header at the top of the file")
 args = parser.parse_args()
 
 print(args.sitelist)

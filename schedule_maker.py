@@ -75,11 +75,12 @@ for site in site_list:
         write_mode = 'w'
 
     if correct_schedule == 'y':
-        with open(f"external/temp_out/{site}.scd", write_mode) as file:
+        with open(f"../schedule_files/{site.split('.')[0]}/{site}.scd", write_mode) as file:
             if args.header:
                 generator.generate_header()
                 file.write(generator.header)
 
+            file.write("\n")
             file.write(generator.get_schedule())
             file.close()
     else:

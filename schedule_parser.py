@@ -10,8 +10,9 @@ class ScheduleParser:
 
 
     """
-    def __init__(self, filename):
+    def __init__(self, filename, auto=False):
         self.filename = filename
+        self.auto = auto
 
         self.raw_date = ""
         self.raw_operations = []
@@ -92,7 +93,7 @@ class ScheduleParser:
     def format_schedule(self):
         self.set_date()
 
-        if self.notes_exist:
+        if self.notes_exist and not self.auto:
             self.get_notes()
 
         self.get_operation()

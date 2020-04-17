@@ -28,6 +28,7 @@ parser.add_argument("-m", "--month", default=next_month, type=int, choices=range
 parser.add_argument("-y", "--year", default=next_month_year, type=int, help="Enter the year of the schedule")
 parser.add_argument("-a", "--append", default=False, action='store_true', help="Append the schedule or overwrite file")
 parser.add_argument("--header", default=False, action='store_true', help="Print the header at the top of the file")
+parser.add_argument("--auto", default=False, action='store_true', help="Removes prompts for automated scripts")
 args = parser.parse_args()
 
 print(args)
@@ -47,13 +48,17 @@ def frame_print(framed_str):
 
 frame_print(f"Parsing Schedule for {schedule_date.strftime('%B %Y')}")
 
-schedule = schedule_parser.ScheduleParser(schedule_path + schedule_file)
+schedule = schedule_parser.ScheduleParser(schedule_path + schedule_file, args.auto)
 schedule.run()
 
 frame_print("Parsed Generic Schedule")
 schedule.print_schedule()
 
-correct_schedule = input("Is the parsed schedule correct? Enter 'y' if it is, 'n' if not: ")
+correct_schedule = 'n'
+if not args.auto:
+    correct_schedule = input("Is the parsed schedule correct? Enter 'y' if it is, 'n' if not: ")
+else:
+    correct_schedule = 'y'
 
 if correct_schedule != 'y':
     quit()
@@ -72,7 +77,11 @@ for site in site_list:
     generator.run()
     generator.print_schedule()
 
-    correct_schedule = input("Is the generated schedule correct? Enter 'y' if it is, 'n' if not: ")
+    correct_schedule = 'n'
+    if not args.auto:
+        correct_schedule = input("Is the generated schedule correct? Enter 'y' if it is, 'n' if not: ")
+    else:
+        correct_schedule = 'y'
 
     if args.append:
         write_mode = 'a'
@@ -80,7 +89,12 @@ for site in site_list:
         write_mode = 'w'
 
     if correct_schedule == 'y':
-        with open(f"../schedule_files/{site.split('.')[0]}/{site}.scd", write_mode) as file:
+        if not args.auto:
+            output_path = f"../schedule_files/{site.split('.')[0]}/{site}.scd"
+        else:
+            output_path = f"../schedule_archive/{args.year}/{args.month:02}/{args.year}{args.month:02}.{site}.scd"
+
+        with open(output_path, write_mode) as file:
             if args.header:
                 generator.generate_header()
                 file.write(generator.header)

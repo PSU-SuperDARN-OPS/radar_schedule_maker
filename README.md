@@ -39,3 +39,4 @@ Directory Structure
 1. `--month` or `-m` - Specify the desired month of the schedule file, defaults to the previous month.
 1. `--header` - Prints the header for the radar before the schedule. This should only be used for new files.
 1. `--append` or `-a`- Appends the new schedule to the end of an existing radar specific schedule file.
+1. `--auto` - Removes user prompts to allow the script to run in an automated way.

@@ -14,7 +14,8 @@ radar.update({"kod": {"Control Program": "uafscan",
                       "Mode": {'Common': '',
                                'Discretionary': '--di',
                                'Special:THEMISSCAN': '',
-                               'Special:RBSPSCAN': ''}
+                               'Special:RBSPSCAN': '',
+                               'Special:INTERLEAVESOUND': ''}
 
                       }})
 
@@ -31,7 +32,8 @@ radar.update({"mcm": {"Control Program": "uafscan",
                       "Mode": {'Common': '',
                                'Discretionary': '--di',
                                'Special:THEMISSCAN': '',
-                               'Special:RBSPSCAN': ''}
+                               'Special:RBSPSCAN': '',
+                               'Special:INTERLEAVESOUND': ''}
 
                       }})
 
@@ -48,6 +50,7 @@ radar.update({"sps": {"Control Program": "uafscan",
                       "Mode": {'Common': '',
                                'Discretionary': '--di',
                                'Special:THEMISSCAN': '',
-                               'Special:RBSPSCAN': ''}
+                               'Special:RBSPSCAN': '',
+                               'Special:INTERLEAVESOUND': ''}
 
                       }})

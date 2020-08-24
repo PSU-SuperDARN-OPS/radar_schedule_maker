@@ -40,3 +40,10 @@ Directory Structure
 1. `--header` - Prints the header for the radar before the schedule. This should only be used for new files.
 1. `--append` or `-a`- Appends the new schedule to the end of an existing radar specific schedule file.
 1. `--auto` - Removes user prompts to allow the script to run in an automated way.
+
+### Adding Modes
+Modes can be added to the 'radar_modes.py' file under the "Mode" key. 
+For special modes, add a key pair in the format 'Special:[SCAN NAME]': '[SCAN PARAMETERS]'
+
+Note, the schedule maker is currently set up to only allow one control program. 
+If more are required, it will require some changes to the radar mode data structure.
